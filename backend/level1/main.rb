@@ -1,3 +1,5 @@
+Planner.new(get data from file).rentals_with_price
+
 {
   "cars": [
     { "id": 1, "price_per_day": 2000, "price_per_km": 10 },
