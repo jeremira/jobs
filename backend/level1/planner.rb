@@ -6,4 +6,7 @@ class Planner
     @rentals = data["rentals"].map { |rental| Rental.new(rental.symbolize_keys) } rescue []
   end
 
+  def rentals_with_prices
+  end
+
 end

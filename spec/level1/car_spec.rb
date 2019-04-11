@@ -102,4 +102,43 @@ RSpec.describe Car do
       end
     end
   end
+
+  describe ".find_by_id" do
+    let(:on_test) { Car.find_by_id id, cars }
+    let(:id) {nil}
+    let(:cars) {[]}
+
+    context "with nil id" do
+      let(:cars) {[Car.new({id: 5})]}
+      it "return nil" do
+        expect(on_test).to be nil
+      end
+    end
+    context "with no cars" do
+      let(:id) {8}
+      it "return nil" do
+        expect(on_test).to be nil
+      end
+    end
+    context "with cars" do
+      let(:cars) do
+        (5..9).map { |i| Car.new(id: i)}
+      end
+      context "for a unknown id" do
+        let(:id) {1}
+        it "return nil" do
+          expect(on_test).to be nil
+        end
+      end
+      context "for a known id" do
+        let(:id) {6}
+        it "return a Car" do
+          expect(on_test).to be_a Car
+        end
+        it "return correct Car" do
+          expect(on_test.id).to eq 6
+        end
+      end
+    end
+  end
 end

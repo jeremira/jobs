@@ -51,4 +51,13 @@ RSpec.describe Planner do
       end
     end
   end
+
+  describe "#rental with price" do
+
+    context "with no rentals" do
+      it "return a list"
+      it "return a empty list"
+      
+    end
+  end
 end
