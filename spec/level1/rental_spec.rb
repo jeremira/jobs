@@ -57,6 +57,27 @@ RSpec.describe Rental do
     end
   end
 
+  describe "#price" do
+    let(:on_test) {my_rental.price([])}
+    let(:rental_params) do
+      {
+        "id" => 123,
+        "car_id" => 5,
+        "start_date" => "2017-12-1",
+        "end_date" => "2017-12-5",
+        "distance" => 57
+      }
+    end
+    before :each do
+      car_double = instance_double("Car")
+      expect(Car).to receive(:find_by_id).with(5, []) {car_double}
+      expect(car_double).to receive(:full_price_for).with(days: 4, distance: 57) {666}
+    end
+    it "find relevant car and ask for it price" do
+      expect(on_test).to eq 666
+    end
+  end
+
   describe "#days" do
     let(:on_test) {my_rental.days}
 
