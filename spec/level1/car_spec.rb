@@ -22,9 +22,9 @@ RSpec.describe Car do
     context "with params" do
       let(:car_params) do
         {
-          id: 123,
-          price_per_km: 456,
-          price_per_day: 789
+          "id" => 123,
+          "price_per_km" => 456,
+          "price_per_day" => 789
         }
       end
       it "init a car instance" do
@@ -45,9 +45,9 @@ RSpec.describe Car do
   describe "#full_price_for" do
     let(:car_params) do
        {
-         id: 123,
-         price_per_day: 23,
-         price_per_km: 14
+         "id" => 123,
+         "price_per_day" => 23,
+         "price_per_km" => 14
        }
     end
 
@@ -109,7 +109,7 @@ RSpec.describe Car do
     let(:cars) {[]}
 
     context "with nil id" do
-      let(:cars) {[Car.new({id: 5})]}
+      let(:cars) {[Car.new({"id" => 5})]}
       it "return nil" do
         expect(on_test).to be nil
       end
@@ -122,7 +122,7 @@ RSpec.describe Car do
     end
     context "with cars" do
       let(:cars) do
-        (5..9).map { |i| Car.new(id: i)}
+        (5..9).map { |i| Car.new({"id" => i})}
       end
       context "for a unknown id" do
         let(:id) {1}

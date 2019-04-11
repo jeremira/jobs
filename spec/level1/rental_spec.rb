@@ -29,11 +29,11 @@ RSpec.describe Rental do
     context "with params" do
       let(:rental_params) do
         {
-          id: 123,
-          car_id: 5,
-          start_date: "2017-12-1",
-          end_date: "2017-12-5",
-          distance: 57
+          "id" => 123,
+          "car_id" => 5,
+          "start_date" => "2017-12-1",
+          "end_date" => "2017-12-5",
+          "distance" => 57
         }
       end
       it "init a rental instance" do
@@ -53,6 +53,38 @@ RSpec.describe Rental do
       end
       it "assign correct distance" do
         expect(my_rental.distance).to eq 57
+      end
+    end
+  end
+
+  describe "#days" do
+    let(:on_test) {my_rental.days}
+
+    context "with same end/start date" do
+      let(:rental_params) {{"start_date" => "2015-12-05", "end_date" => "2015-12-05"}}
+      it "return an integer" do
+        expect(on_test).to be_an Integer
+      end
+      it "return correct day amount" do
+        expect(on_test).to eq 0
+      end
+    end
+    context "when start before end" do
+      let(:rental_params) {{"start_date" => "2015-12-05", "end_date" => "2015-12-09"}}
+      it "return an integer" do
+        expect(on_test).to be_an Integer
+      end
+      it "return correct day amount" do
+        expect(on_test).to eq 4
+      end
+    end
+    context "when ending before starting" do
+      let(:rental_params) {{"start_date" => "2015-12-05", "end_date" => "2015-12-01"}}
+      it "return an integer" do
+        expect(on_test).to be_an Integer
+      end
+      it "return correct day amount" do
+        expect(on_test).to eq 4
       end
     end
   end
