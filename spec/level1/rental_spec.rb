@@ -1,4 +1,3 @@
-require 'time'
 require_relative '../../backend/level1/rental'
 
 RSpec.describe Rental do

@@ -1,7 +1,4 @@
-require 'time'
-require 'json'
 require_relative '../../backend/level1/planner'
-require_relative '../../backend/level1/rental'
 
 RSpec.describe Planner do
   let(:my_planner) {Planner.new(data_planner)}

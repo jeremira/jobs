@@ -1,3 +1,6 @@
+require_relative '../../backend/level1/rental'
+require_relative '../../backend/level1/car'
+
 class Planner
   attr_reader :cars, :rentals
 
