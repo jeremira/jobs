@@ -17,6 +17,6 @@ class Rental
   end
 
   def days
-    (end_date - start_date).to_i.abs / (24 * 60 * 60)
+    ((end_date - start_date).to_i.abs / (24 * 60 * 60) ) + 1
   end
 end

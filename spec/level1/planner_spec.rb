@@ -1,11 +1,11 @@
 require_relative '../../backend/level1/planner'
 
 RSpec.describe Planner do
-  let(:my_planner) {Planner.new(data_planner)}
-  let(:data_planner) {{}}
+  let(:my_planner) {Planner.new(filepath)}
+  let(:filepath) {""}
 
   describe "#Initialize" do
-    context "with no data" do
+    context "input data are not found" do
       it "instanciate a planner" do
         expect(my_planner).to be_a Planner
       end
@@ -16,19 +16,8 @@ RSpec.describe Planner do
         expect(my_planner.rentals).to eq []
       end
     end
-    context "with valid data" do
-      let(:json_data_planner) do
-        {
-          "cars" => [
-            { "id" => 1, "price_per_day" => 2000, "price_per_km" => 10 },
-            { "id" => 2, "price_per_day" => 3000, "price_per_km" => 15 }
-          ],
-          "rentals" => [
-            { "id" => 1, "car_id" => 1, "start_date" => "2017-12-8", "end_date" => "2017-12-10", "distance" => 100 },
-            { "id" => 2, "car_id" => 1, "start_date" => "2017-12-14", "end_date" => "2017-12-18", "distance" => 550 }
-          ]
-        }
-      end
+    context "valid input data are found" do
+      let(:filepath) {'spec/level1/input_spec.json'}
 
       it "instanciate a planner" do
         expect(my_planner).to be_an Planner
@@ -36,11 +25,17 @@ RSpec.describe Planner do
       it "assign cars list" do
         expect(my_planner.cars).to be_an Array
       end
+      it "setup all Car object" do
+        expect(my_planner.cars.size).to eq 3
+      end
       it "construct cars object" do
         my_planner.cars.each { |car| expect(car).to be_a Car }
       end
       it "assign rentals list" do
         expect(my_planner.rentals).to be_an Array
+      end
+      it "setup all Rental object" do
+        expect(my_planner.rentals.size).to eq 3
       end
       it "construct rentals object" do
         my_planner.rentals.each { |rental| expect(rental).to be_a Rental }
@@ -50,12 +45,10 @@ RSpec.describe Planner do
 
   describe "#rental with price" do
     let(:on_test) { my_planner.rentals_with_prices}
-    let(:data_planner) do
-      { "cars" => [], "rentals" => rentals }
-    end
 
     context "with no rentals" do
-      let(:rentals) {[]}
+      let(:filepath) {'spec/level1/input_no_rental.json'}
+
       it "return a list" do
         expect(on_test).to be_an Array
       end
@@ -64,7 +57,7 @@ RSpec.describe Planner do
       end
     end
     context "with a rental" do
-      let(:rentals) { [{ "id" => 8}] }
+      let(:filepath) {'spec/level1/input_one_rental.json'}
       before(:each) { expect(my_planner.rentals.first).to receive(:price) {999}}
 
       it "return a list" do
@@ -90,7 +83,7 @@ RSpec.describe Planner do
       end
     end
     context "with many rentals" do
-      let(:rentals) { [{ "id" => 8}, {"id" => 12}, {"id" => 73}] }
+      let(:filepath) {'spec/level1/input_spec.json'}
       before(:each) do
         my_planner.rentals.each { |rental| expect(rental).to receive(:price) {555}}
       end

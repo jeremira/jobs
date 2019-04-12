@@ -70,7 +70,7 @@ RSpec.describe Rental do
     before :each do
       car_double = instance_double("Car")
       expect(Car).to receive(:find_by_id).with(5, []) {car_double}
-      expect(car_double).to receive(:full_price_for).with(days: 4, distance: 57) {666}
+      expect(car_double).to receive(:full_price_for).with(days: 5, distance: 57) {666}
     end
     it "find relevant car and ask for it price" do
       expect(on_test).to eq 666
@@ -86,7 +86,7 @@ RSpec.describe Rental do
         expect(on_test).to be_an Integer
       end
       it "return correct day amount" do
-        expect(on_test).to eq 0
+        expect(on_test).to eq 1
       end
     end
     context "when start before end" do
@@ -95,7 +95,7 @@ RSpec.describe Rental do
         expect(on_test).to be_an Integer
       end
       it "return correct day amount" do
-        expect(on_test).to eq 4
+        expect(on_test).to eq 5
       end
     end
     context "when ending before starting" do
@@ -104,7 +104,7 @@ RSpec.describe Rental do
         expect(on_test).to be_an Integer
       end
       it "return correct day amount" do
-        expect(on_test).to eq 4
+        expect(on_test).to eq 5
       end
     end
   end
