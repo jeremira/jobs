@@ -15,12 +15,11 @@ class Planner
     @rentals = data["rentals"].map { |rental| Rental.new(rental) } rescue []
   end
 
-  def generate_output
-    # output = {
-    #   "rentals" => Planner.new( JSON.parse(File.read('data/input.json')) ).rentals_with_prices
-    # }.to_json
-    #
-    # File.write('data/output.json', output)
+  def generate_output(filepath= 'data/output.json')
+    File.write(
+      filepath,
+      { "rentals" => rentals_with_prices }.to_json
+    )
   end
 
   def rentals_with_prices
@@ -31,5 +30,4 @@ class Planner
       }
     end
   end
-
 end

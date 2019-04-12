@@ -43,6 +43,23 @@ RSpec.describe Planner do
     end
   end
 
+  describe "#generate_output" do
+    let(:on_test) {my_planner.generate_output('spec/level1/test_output.json')}
+    let(:filepath) {'spec/level1/input_spec.json'}
+
+    before(:each) { on_test }
+    after(:each) { File.delete 'spec/level1/test_output.json' }
+
+    it "generate a output file" do
+      expect(File.exist? 'spec/level1/test_output.json').to be true
+    end
+    it "generate correct output" do
+      expected_content = File.read('spec/level1/expected_output.json').gsub(/\s+/, "")
+      output_content = File.read('spec/level1/test_output.json').gsub(/\s+/, "")
+      expect(output_content).to eq expected_content
+    end
+  end
+
   describe "#rental with price" do
     let(:on_test) { my_planner.rentals_with_prices}
 
