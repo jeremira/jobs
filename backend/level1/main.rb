@@ -1,5 +1,8 @@
-require_relative 'planner'
-
+require 'json'
+require 'time'
+require './planner'
+require './rental'
+require './car'
 #
 # Read data/input.json and generate relevant output file
 #

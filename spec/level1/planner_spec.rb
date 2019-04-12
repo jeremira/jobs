@@ -1,4 +1,6 @@
 require_relative '../../backend/level1/planner'
+require_relative '../../backend/level1/rental'
+require_relative '../../backend/level1/car'
 
 RSpec.describe Planner do
   let(:my_planner) {Planner.new(filepath)}

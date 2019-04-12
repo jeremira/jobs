@@ -1,7 +1,3 @@
-require 'json'
-require_relative 'rental'
-require_relative 'car'
-
 class Planner
   attr_reader :cars, :rentals
 

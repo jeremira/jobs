@@ -1,5 +1,3 @@
-require 'time'
-
 class Rental
   attr_reader :id, :car_id, :start_date, :end_date, :distance
 

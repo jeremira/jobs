@@ -1,4 +1,6 @@
 require_relative '../../backend/level2/rental'
+require_relative '../../backend/level2/car'
+require_relative '../../backend/level2/planner'
 
 RSpec.describe Rental do
   let(:my_rental) {Rental.new(rental_params)}
