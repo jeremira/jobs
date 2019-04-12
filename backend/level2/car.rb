@@ -18,10 +18,6 @@ class Car
 
   private
 
-      # - price per day decreases by 10% after 1 day
-      # - price per day decreases by 30% after 4 days
-      # - price per day decreases by 50% after 10 days
-
   def day_discount(days)
     case days
     when (0..1)
